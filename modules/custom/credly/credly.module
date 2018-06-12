@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -34,15 +35,19 @@ function credly_theme() {
   ];
 }
 
-use Drupal\Core\Form\FormStateInterface;
-
 /**
  * Implements hook_form_alter() on behalf of credly.module.
  */
-function credly_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function credly_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     // Change form id here
-    if ($form_id == 'form_test_alter_form') {
-        drupal_set_message('form_test_form_alter() executed.');
-
+    if ($form_id == 'user_login_form') {
+        $form['#submit'][1] = 'credly_message_onlogin_handler';
     }
+}
+
+/**
+ * Function for credly module user setting message.
+ */
+function credly_message_onlogin_handler(){
+    drupal_set_message(t('Please provide login credentials for your credly account to display badge'), 'status');
 }

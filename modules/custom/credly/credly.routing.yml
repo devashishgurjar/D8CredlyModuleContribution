@@ -1,0 +1,9 @@
+
+credly.credly_user_credentials:
+  path: '/credly/form/credly_user_credentials'
+  defaults:
+    _form: '\Drupal\credly\Form\CredlyUserCredentials'
+    _title: 'CredlyUserCredentials'
+  requirements:
+    _access: 'TRUE'
+  
