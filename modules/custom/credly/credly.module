@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -25,17 +24,6 @@ function credly_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_form_alter().
- */
-function credly_form_alter(&$form, FormStateInterface $form_state, $form_id){
-  if($form_id == 'user_login_form'){
-    print_r($form);
-    //$form['#submit'][2] = 'credly_message_onlogin_handler';
-    die(gddsaugadg);
-  }
-}
-
-/**
  * Implements hook_theme().
  */
 function credly_theme() {
@@ -44,4 +32,17 @@ function credly_theme() {
       'render element' => 'children',
     ],
   ];
+}
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter() on behalf of credly.module.
+ */
+function credly_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    // Change form id here
+    if ($form_id == 'form_test_alter_form') {
+        drupal_set_message('form_test_form_alter() executed.');
+
+    }
 }
