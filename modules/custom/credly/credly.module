@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Contains credly.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function credly_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the credly module.
+    case 'help.page.credly':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module is a third party integration of drupal with credly a badge allotment lms tool') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function credly_form_alter(&$form, FormStateInterface $form_state, $form_id){
+  if($form_id == 'user_login_form'){
+    print_r($form);
+    //$form['#submit'][2] = 'credly_message_onlogin_handler';
+    die(gddsaugadg);
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function credly_theme() {
+  return [
+    'credly' => [
+      'render element' => 'children',
+    ],
+  ];
+}
