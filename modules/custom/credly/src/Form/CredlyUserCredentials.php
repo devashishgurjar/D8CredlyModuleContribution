@@ -36,7 +36,7 @@ class CredlyUserCredentials extends FormBase {
       '#description' => $this->t('Please enter your credly authenticated password here'),
       '#maxlength' => 64,
       '#size' => 64,
-      '#weight' => '1',
+      '#weight' => '0',
     ];
     $form['submit'] = [
       '#type' => 'submit',
