@@ -1,35 +1,35 @@
 <?php
 
-/* core/themes/bartik/templates/status-messages.html.twig */
-class __TwigTemplate_c5daea63eb5c9b07363d50e96892a392ad0b41c79a1ac6151fbcc5251c862a42 extends Twig_Template
+/* core/themes/classy/templates/block/block--local-tasks-block.html.twig */
+class __TwigTemplate_75f69e34df12f2cb364a4b1704bc609d8c4b9fef2743d1acbea42aa23d2cdb9b extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("@classy/misc/status-messages.html.twig", "core/themes/bartik/templates/status-messages.html.twig", 1);
+        $this->parent = $this->loadTemplate("block.html.twig", "core/themes/classy/templates/block/block--local-tasks-block.html.twig", 1);
         $this->blocks = array(
-            'messages' => array($this, 'block_messages'),
+            'content' => array($this, 'block_content'),
         );
     }
 
     protected function doGetParent(array $context)
     {
-        return "@classy/misc/status-messages.html.twig";
+        return "block.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $tags = array("if" => 24);
-        $filters = array();
-        $functions = array("attach_library" => 25);
+        $tags = array("if" => 9);
+        $filters = array("t" => 10);
+        $functions = array();
 
         try {
             $this->env->getExtension('Twig_Extension_Sandbox')->checkSecurity(
                 array('if'),
-                array(),
-                array('attach_library')
+                array('t'),
+                array()
             );
         } catch (Twig_Sandbox_SecurityError $e) {
             $e->setSourceContext($this->getSourceContext());
@@ -48,29 +48,28 @@ class __TwigTemplate_c5daea63eb5c9b07363d50e96892a392ad0b41c79a1ac6151fbcc5251c8
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 23
-    public function block_messages($context, array $blocks = array())
+    // line 8
+    public function block_content($context, array $blocks = array())
     {
-        // line 24
+        // line 9
         echo "  ";
-        if ( !twig_test_empty((isset($context["message_list"]) ? $context["message_list"] : null))) {
-            // line 25
-            echo "    ";
-            echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, $this->env->getExtension('Drupal\Core\Template\TwigExtension')->attachLibrary("bartik/messages"), "html", null, true));
-            echo "
-    <div class=\"messages__wrapper layout-container\">
+        if ((isset($context["content"]) ? $context["content"] : null)) {
+            // line 10
+            echo "    <nav class=\"tabs\" role=\"navigation\" aria-label=\"";
+            echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->renderVar(t("Tabs")));
+            echo "\">
       ";
-            // line 27
-            $this->displayParentBlock("messages", $context, $blocks);
+            // line 11
+            echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, (isset($context["content"]) ? $context["content"] : null), "html", null, true));
             echo "
-    </div>
+    </nav>
   ";
         }
     }
 
     public function getTemplateName()
     {
-        return "core/themes/bartik/templates/status-messages.html.twig";
+        return "core/themes/classy/templates/block/block--local-tasks-block.html.twig";
     }
 
     public function isTraitable()
@@ -80,7 +79,7 @@ class __TwigTemplate_c5daea63eb5c9b07363d50e96892a392ad0b41c79a1ac6151fbcc5251c8
 
     public function getDebugInfo()
     {
-        return array (  64 => 27,  58 => 25,  55 => 24,  52 => 23,  11 => 1,);
+        return array (  63 => 11,  58 => 10,  55 => 9,  52 => 8,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -93,6 +92,6 @@ class __TwigTemplate_c5daea63eb5c9b07363d50e96892a392ad0b41c79a1ac6151fbcc5251c8
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "core/themes/bartik/templates/status-messages.html.twig", "C:\\xampp\\htdocs\\D8CredlyModuleContribution\\core\\themes\\bartik\\templates\\status-messages.html.twig");
+        return new Twig_Source("", "core/themes/classy/templates/block/block--local-tasks-block.html.twig", "C:\\xampp\\htdocs\\D8CredlyModuleContribution\\core\\themes\\classy\\templates\\block\\block--local-tasks-block.html.twig");
     }
 }

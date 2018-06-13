@@ -1,7 +1,7 @@
 <?php
 
-/* core/themes/stable/templates/misc/feed-icon.html.twig */
-class __TwigTemplate_6a24332d39725b49458ec6dad9de01545b424372147446dff4868ff0ca8a436d extends Twig_Template
+/* core/themes/classy/templates/field/image-formatter.html.twig */
+class __TwigTemplate_e18722380924e0c8e26f521294629e9763917d315cc1dd1b50aa06e078d7264b extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -15,14 +15,14 @@ class __TwigTemplate_6a24332d39725b49458ec6dad9de01545b424372147446dff4868ff0ca8
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $tags = array();
-        $filters = array("t" => 14);
+        $tags = array("if" => 15);
+        $filters = array();
         $functions = array();
 
         try {
             $this->env->getExtension('Twig_Extension_Sandbox')->checkSecurity(
+                array('if'),
                 array(),
-                array('t'),
                 array()
             );
         } catch (Twig_Sandbox_SecurityError $e) {
@@ -39,23 +39,27 @@ class __TwigTemplate_6a24332d39725b49458ec6dad9de01545b424372147446dff4868ff0ca8
             throw $e;
         }
 
-        // line 13
-        echo "<a href=\"";
-        echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, (isset($context["url"]) ? $context["url"] : null), "html", null, true));
-        echo "\"";
-        echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, $this->getAttribute((isset($context["attributes"]) ? $context["attributes"] : null), "addClass", array(0 => "feed-icon"), "method"), "html", null, true));
-        echo ">
-  ";
-        // line 14
-        echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->renderVar(t("Subscribe to @title", array("@title" => (isset($context["title"]) ? $context["title"] : null)))));
-        echo "
-</a>
+        // line 15
+        if ((isset($context["url"]) ? $context["url"] : null)) {
+            // line 16
+            echo "  <a href=\"";
+            echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, (isset($context["url"]) ? $context["url"] : null), "html", null, true));
+            echo "\">";
+            echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, (isset($context["image"]) ? $context["image"] : null), "html", null, true));
+            echo "</a>
 ";
+        } else {
+            // line 18
+            echo "  ";
+            echo $this->env->getExtension('Twig_Extension_Sandbox')->ensureToStringAllowed($this->env->getExtension('Drupal\Core\Template\TwigExtension')->escapeFilter($this->env, (isset($context["image"]) ? $context["image"] : null), "html", null, true));
+            echo "
+";
+        }
     }
 
     public function getTemplateName()
     {
-        return "core/themes/stable/templates/misc/feed-icon.html.twig";
+        return "core/themes/classy/templates/field/image-formatter.html.twig";
     }
 
     public function isTraitable()
@@ -65,7 +69,7 @@ class __TwigTemplate_6a24332d39725b49458ec6dad9de01545b424372147446dff4868ff0ca8
 
     public function getDebugInfo()
     {
-        return array (  50 => 14,  43 => 13,);
+        return array (  53 => 18,  45 => 16,  43 => 15,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -78,6 +82,6 @@ class __TwigTemplate_6a24332d39725b49458ec6dad9de01545b424372147446dff4868ff0ca8
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "core/themes/stable/templates/misc/feed-icon.html.twig", "C:\\xampp\\htdocs\\D8CredlyModuleContribution\\core\\themes\\stable\\templates\\misc\\feed-icon.html.twig");
+        return new Twig_Source("", "core/themes/classy/templates/field/image-formatter.html.twig", "C:\\xampp\\htdocs\\D8CredlyModuleContribution\\core\\themes\\classy\\templates\\field\\image-formatter.html.twig");
     }
 }

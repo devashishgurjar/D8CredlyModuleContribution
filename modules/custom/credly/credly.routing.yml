@@ -1,9 +1,9 @@
-
-credly.credly_user_credentials:
-  path: '/credly/form/credly_user_credentials'
-  defaults:
+credly.account:
+  path: '/user/{user}/credly_setting'
+  defaults: 
     _form: '\Drupal\credly\Form\CredlyUserCredentials'
-    _title: 'CredlyUserCredentials'
+    _title: 'Credly User Credentials'
   requirements:
-    _access: 'TRUE'
+    _permission: 'access content'
+    user: \d+    
   
