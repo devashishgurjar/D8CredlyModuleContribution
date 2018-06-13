@@ -57,11 +57,22 @@ class CredlyUserCredentials extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Display result.
-    foreach ($form_state->getValues() as $key => $value) {
-      drupal_set_message($key . ': ' . $value);
-    }
+    // Save result.
+    $UserData = \Drupal::currentUser();
+    $UserId = $UserData->id();
+    $Username = $form_state->getValue('CredlyUsername');
+    $UserPassword = $form_state->getValue('CredlyPassword');
+    $DatabaseValues = array(
+            'uid' =>  $UserId,
+            'CredlyUsername' => $Username,
+            'CredlyPassword' =>  $UserPassword,
+    );
 
+    $database = \Drupal::database();
+    $database->insert('credlyusercredentialsinfo')
+            ->fields($DatabaseValues)
+            ->execute();
+    drupal_set_message("Your Credly Credentials are successfully Inserted");
   }
 
 }

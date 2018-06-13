@@ -52,6 +52,11 @@ function credly_schema() {
         'description' => 'credly password of the person.',
       ],
     ],
+    'primary key' => ['uid'],
+    'indexes' => [
+      'CredlyUsername' => ['CredlyUsername'],
+      'CredlyPassword' => ['CredlyPassword'],
+    ],
   ];
 
   return $schema;
