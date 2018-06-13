@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the credly module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Creates some default entries on this module custom table.
+ *
+ * @see hook_install()
+ *
+ * @ingroup credly
+ */
+function credly_install() {
+  // Add a default entry.
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup credly
+ */
+function credly_schema() {
+  $schema['CredlyUserCredentialsInfo'] = [
+    'description' => 'Stores users personal entries for credly user credentials.',
+    'fields' => [
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator user's {users}.uid",
+      ],
+      'CredlyUsername' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'credly username of the person.',
+      ],
+      'CredlyPassword' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'credly password of the person.',
+      ],
+    ],
+  ];
+
+  return $schema;
+}
