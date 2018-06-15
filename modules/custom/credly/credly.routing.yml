@@ -9,10 +9,10 @@ credly.account:
   
 
 credly.credly_admin_setting_form:
-  path: '/credly/form/credly_admin_setting'
+  path: '/admin/credly/form/credly_admin_setting'
   defaults:
     _form: '\Drupal\credly\Form\CredlyAdminSettingForm'
-    _title: 'CredlyAdminSettingForm'
+    _title: 'Credly Admin Setting Form'
   requirements:
     _access: 'TRUE'
   

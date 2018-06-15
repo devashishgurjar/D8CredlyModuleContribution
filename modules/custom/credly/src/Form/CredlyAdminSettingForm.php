@@ -52,14 +52,9 @@ class CredlyAdminSettingForm extends FormBase {
       '#description' => $this->t('Open the URL https://developers.credly.com/my-app copy the Seceret Key and enter here'),
       '#weight' => '0',
     ];
-    $form['configure_admin_account'] = [
-      '#type' => 'Submit',
-      '#title' => $this->t('Configure Admin Account'),
-      '#weight' => '0',
-    ];
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Submit'),
+      '#value' => $this->t('Configure Admin Account'),
     ];
 
     return $form;

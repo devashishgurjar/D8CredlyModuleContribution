@@ -1,0 +1,4 @@
+credly.credly_admin_setting_tab:
+  title: 'Credly Admin Settings'
+  parent: system.admin_config_services
+  route_name: 'credly.credly_admin_setting_form'
