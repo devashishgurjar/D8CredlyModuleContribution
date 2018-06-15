@@ -7,3 +7,12 @@ credly.account:
     _permission: 'access content'
     user: \d+    
   
+
+credly.credly_admin_setting_form:
+  path: '/credly/form/credly_admin_setting'
+  defaults:
+    _form: '\Drupal\credly\Form\CredlyAdminSettingForm'
+    _title: 'CredlyAdminSettingForm'
+  requirements:
+    _access: 'TRUE'
+  

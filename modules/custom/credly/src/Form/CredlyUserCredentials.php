@@ -67,12 +67,24 @@ class CredlyUserCredentials extends FormBase {
             'CredlyUsername' => $Username,
             'CredlyPassword' =>  $UserPassword,
     );
-
     $database = \Drupal::database();
-    $database->insert('credlyusercredentialsinfo')
+    $HasUserInformation = $database->select('credlyusercredentialsinfo', 'n')
+        ->fields('n')
+        ->condition('uid', $UserId,'=')
+        ->execute()
+        ->fetchAssoc();
+
+    if(!$HasUserInformation){
+      $database->insert('credlyusercredentialsinfo')
             ->fields($DatabaseValues)
             ->execute();
-    drupal_set_message("Your Credly Credentials are successfully Inserted");
+      drupal_set_message("Your Credly Credentials are successfully Inserted");
+    }else{
+      $database->update('credlyusercredentialsinfo')
+            ->fields($DatabaseValues)
+            ->condition('uid', $UserId,'=')
+            ->execute();
+      drupal_set_message("Your Credly Credentials are Updated");
+    }
   }
-
 }

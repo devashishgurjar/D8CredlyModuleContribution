@@ -25,17 +25,6 @@ function credly_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_theme().
- */
-function credly_theme() {
-  return [
-    'credly' => [
-      'render element' => 'children',
-    ],
-  ];
-}
-
-/**
  * Implements hook_form_alter() on behalf of credly.module.
  */
 function credly_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
