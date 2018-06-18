@@ -4,7 +4,7 @@ namespace Drupal\credly\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-
+use Drupal\custom_guzzle_request\Http\CustomGuzzleHttp;
 /**
  * Class CredlyAdminSettingForm.
  */
@@ -92,6 +92,18 @@ class CredlyAdminSettingForm extends FormBase {
     $inject_config->set('siteadmincredlypassword', $AdminPassword)->save();
     $inject_config->set('siteadmincredlyapikey', $AppApiKey)->save();
     $inject_config->set('siteadmincredlysecret', $AppApiSecret)->save();
+
+    $check = new CustomGuzzleHttp();
+    $params = array();
+    $params['email'] = $AdminUsername; //"vishal.sirsodiya@webdunia.net"; //
+    $params['password'] = $AdminPassword;
+    $api_url = "https://api.credly.com/v1.1/authenticate"; 
+    //$api_url = adrenna_credly_endpoint()."me/password";   
+    //$api_result =  adrenna_credly_rest('POST', $api_url, $params, $apiKey, $apiSecret);
+    $response = $check->performRequest('Post', $api_url, $AppApiKey, $AppApiSecret, $params);
+    print_r($response);
+    die(ewewf);
+
   }
 
 }
