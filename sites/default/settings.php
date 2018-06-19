@@ -797,3 +797,5 @@ $databases['default']['default'] = array (
 );
 $settings['install_profile'] = 'standard';
 $config_directories['sync'] = 'sites/default/files/config_UWPjAZFn1U92TMp7ty4olYlhKBAIN2XCM-vKswD50mm0j21kMifuivlBB9X8S85oinkGYROvcQ/sync';
+
+$config['system.logging']['error_level'] = 'verbose';

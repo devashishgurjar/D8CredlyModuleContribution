@@ -4,13 +4,11 @@ namespace Drupal\credly\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-
+use Psr\Http\Message\RequestInterface;
 /**
  * Class CredlyAdminSettingForm.
  */
 class CredlyAdminSettingForm extends FormBase {
-
-
   /**
    * {@inheritdoc}
    */
@@ -86,12 +84,39 @@ class CredlyAdminSettingForm extends FormBase {
     $AdminPassword = $form_state->getValue('credly_admin_password');
     $AppApiKey = $form_state->getValue('credly_app_api_key');
     $AppApiSecret = $form_state->getValue('credly_api_secret');
-    $inject_config = \Drupal::service('config.factory')->getEditable('system.site');
-    // Setting and saving site api key value if its something different from default value.
-    $inject_config->set('siteadmincredlyusername', $AdminUsername)->save();
-    $inject_config->set('siteadmincredlypassword', $AdminPassword)->save();
-    $inject_config->set('siteadmincredlyapikey', $AppApiKey)->save();
-    $inject_config->set('siteadmincredlysecret', $AppApiSecret)->save();
+    $StatusCode = $this->credlyApiCall($AppApiSecret, $AppApiKey , $AdminUsername, $AdminPassword);
+    if ($StatusCode == '200') {
+      $inject_config = \Drupal::service('config.factory')->getEditable('system.site');
+      // Setting and saving site api key value if its something different from default value.
+      $inject_config->set('siteadmincredlyusername', $AdminUsername)->save();
+      $inject_config->set('siteadmincredlypassword', $AdminPassword)->save();
+      $inject_config->set('siteadmincredlyapikey', $AppApiKey)->save();
+      $inject_config->set('siteadmincredlysecret', $AppApiSecret)->save();
+      $this->messenger()->addMessage($this->t('Credly Authentication Done Successfully, With the below admin credentials')); 
+    }else{
+      $this->messenger()->addWarning($this->t('Credly Authentication failed, returning the following: %token', ['%token' => $StatusCode]));
+    }
   }
 
+  /**
+  * Callback function to get the data from REST API
+  */
+  public function credlyApiCall($AppApiSecret, $AppApiKey , $AdminUsername, $AdminPassword) {
+    $client = \Drupal::httpClient();
+    $url = $this->CredlyApiEndpoint()."authenticate";
+    $response = $client->post($url, [
+      'auth' => [$AdminUsername, $AdminPassword],
+      'headers' => [
+      'X-Api-Key' => $AppApiKey,
+      'X-Api-Secret' => $AppApiSecret
+      ]]);
+    return $response->getstatuscode();
+  }
+  /**
+  * Callback function to get the Base Endpoint of the API
+  */
+  function CredlyApiEndpoint() {
+  $url = 'https://api.credly.com/v1.1/';
+  return $url;
+  }
 }
