@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Psr\Http\Message\RequestInterface;
+use \GuzzleHttp\Exception\RequestException;
 
 /**
  * Implements hook_help().
@@ -38,5 +40,42 @@ function credly_form_user_login_form_alter(&$form, FormStateInterface $form_stat
  * Function for credly module user setting message.
  */
 function credly_message_onlogin_handler(){
-    drupal_set_message(t('Please provide login credentials for your credly account to display badge'), 'status');
+  drupal_set_message(t('Please provide login credentials for your credly account to display badge'), 'status');
+}
+
+/**
+ * Function for guzzel request.
+ */
+function credly_reponse($AppApiSecret, $AppApiKey , $AdminUsername, $AdminPassword, $url){
+  $client = \Drupal::httpClient();
+  $response = $client->post($url, [
+        'auth' => [$AdminUsername, $AdminPassword],
+        'headers' => [
+        'X-Api-Key' => $AppApiKey,
+        'X-Api-Secret' => $AppApiSecret
+      ]]);
+  return $response;
+}
+
+  /**
+  * Callback function to get the data from REST API
+  */
+function credlyApiCall($AppApiSecret, $AppApiKey , $AdminUsername, $AdminPassword, $url) {
+  try {
+    $response = credly_reponse($AppApiSecret, $AppApiKey , $AdminUsername, $AdminPassword, $url);
+    if($response->getstatuscode() == '200') {
+        return TRUE;
+    }
+  }
+  catch (RequestException $exception) {
+    return $exception->getMessage();
+  }
+}
+
+  /**
+  * Callback function to get the Base Endpoint of the API
+  */
+function CredlyApiEndpoint() {
+    $url = 'https://api.credly.com/v1.1/';
+    return $url;
 }

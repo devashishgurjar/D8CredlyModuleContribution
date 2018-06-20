@@ -4,6 +4,7 @@ namespace Drupal\credly\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use \GuzzleHttp\Exception\RequestException;
 
 /**
  * Class CredlyUserCredentials.
@@ -68,23 +69,32 @@ class CredlyUserCredentials extends FormBase {
             'CredlyPassword' =>  $UserPassword,
     );
     $database = \Drupal::database();
-    $HasUserInformation = $database->select('credlyusercredentialsinfo', 'n')
+
+    $url = CredlyApiEndpoint()."authenticate";
+    $AppApiSecret = \Drupal::config('system.site')->get('siteadmincredlysecret');
+    $AppApiKey = \Drupal::config('system.site')->get('siteadmincredlyapikey');
+    $StatusCode = credlyApiCall($AppApiSecret, $AppApiKey , $Username, $UserPassword, $url);
+
+    if ($StatusCode == 'TRUE') {
+        $HasUserInformation = $database->select('CredlyUserCredentialsInfo', 'n')
         ->fields('n')
         ->condition('uid', $UserId,'=')
         ->execute()
         ->fetchAssoc();
-
-    if(!$HasUserInformation){
-      $database->insert('credlyusercredentialsinfo')
-            ->fields($DatabaseValues)
-            ->execute();
-      drupal_set_message("Your Credly Credentials are successfully Inserted");
-    }else{
-      $database->update('credlyusercredentialsinfo')
-            ->fields($DatabaseValues)
-            ->condition('uid', $UserId,'=')
-            ->execute();
-      drupal_set_message("Your Credly Credentials are Updated");
+      if(!$HasUserInformation){
+          $database->insert('CredlyUserCredentialsInfo')
+                ->fields($DatabaseValues)
+                ->execute();
+          $this->messenger()->addMessage($this->t('Credly Authentication done Successfully, Credly Badge will be displayed on your dashboard'));
+        }else{
+          $database->update('CredlyUserCredentialsInfo')
+                ->fields($DatabaseValues)
+                ->condition('uid', $UserId,'=')
+                ->execute();
+          $this->messenger()->addMessage($this->t('Credly Authentication detials updated Successfully, Credly Badge will be displayed on your dashboard'));
+        }      
+      }else{
+      $this->messenger()->addError($this->t('Credly Authentication failed, returning the following error: %token', ['%token' => $StatusCode]));
     }
   }
 }
