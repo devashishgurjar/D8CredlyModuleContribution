@@ -1,0 +1,7 @@
+siteinformation_form_alter.page_node_access:
+  path: '/page_json/{api_key}/{node_id}'
+  defaults:
+    _controller: '\Drupal\siteinformation_form_alter\controller\NodeAccessController::page_node_access'
+    _title: 'Page Node json representation'
+  requirements:
+    _permission: 'access content'

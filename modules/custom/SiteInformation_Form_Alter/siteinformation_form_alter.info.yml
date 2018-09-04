@@ -1,0 +1,7 @@
+name: Siteinformation Form Alter
+type: module
+description: 'This module provides a URL that responds with a JSON representation of a given node of content type page'
+core: 8.x
+package: Custom
+dependencies:
+  - serialization
